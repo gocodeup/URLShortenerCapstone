@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+  {% set title = 'Codeup URL Shortener' %}
+  {% include 'header.html' %}
+
+  <body>
+    <h1>{{ title }}</h1>
+    <div class="container">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-create-tab" data-bs-toggle="tab" data-bs-target="#nav-create" type="button" role="tab" aria-controls="nav-create" aria-selected="true">Create</button>
+                <button class="nav-link" id="nav-lookup-tab" data-bs-toggle="tab" data-bs-target="#nav-lookup" type="button" role="tab" aria-controls="nav-lookup" aria-selected="false">Lookup</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab">
+                <form action="/create" method="post">
+                    <div class="row mt-3 mb-2 align-items-center">
+                        <div class="col-2">
+                            <label for="urlInput">URL to shorten:</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" class="form-control" id="urlInput" name="urlInput" placeholder="http://example.com"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Shortened URL</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="nav-lookup" role="tabpanel" aria-labelledby="nav-lookup-tab">
+                <form action="/lookup" method="post">
+                    <div class="row mt-3 mb-2 align-items-center">
+                        <div class="col-2">
+                            <label for="shortcodeInput">Shortcode to lookup:</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" class="form-control" id="shortcodeInput" name="shortcodeInput" placeholder="ab12feac88"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Lookup Shortened URL</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+
+  </body>
+</html>
