@@ -8,6 +8,7 @@ import storage
 import datetime
 import hashlib
 import re
+import validators
 
 app_log = logging.getLogger(__name__)
 app = Flask(__name__)
@@ -41,6 +42,9 @@ def get_info():
         # TODO: return an error message about invalid shortcode
         return f'<h1>Invalid shortcode {shortcode}</h1>'
     info = storage.get_info(short_code=shortcode)
+    if info is None:
+        # TODO: return an error message about invalid shortcode
+        return f'<h1>Invalid shortcode {shortcode}</h1>'
     # TODO: run the info through a template
     return info
 
@@ -48,7 +52,9 @@ def get_info():
 def create():
     '''Create a shortened code using the info in the posted data'''
     url = request.form['urlInput']
-    # TODO: validate that it is a url
+    if validators.url(url) != True:
+        # TODO: template the invalid url error
+        return f'<h1>Invalid url: {url}</h1>'
     timestamp = datetime.datetime.now(datetime.timezone.utc)
     ip_address = request.remote_addr
     short_code = generate_short_code(url)
